@@ -1,61 +1,71 @@
-[9/7 12:40 PM] Chinchinada, Meghana
+  [9/7 12:40 PM] Chinchinada, Meghana
+      
+
+
+  CREATE TABLE customer(
+    customer_id int(25) PRIMARY KEY auto_increment,
+    name varchar(50) Not NULL,
+    email varchar(50) NOT NULL,
+    password varchar(20) NOT NULL,
+    address varchar(50) NOT NULL,
+    mobile_no varchar(12) NOT NULL,
+    gender varchar(10) Not NULL
+  );
+
+
+
+
+
+  CREATE TABLE customer_orders (
     
-
-
-CREATE TABLE customer(
-  customer_id int(25) PRIMARY KEY auto_increment,
-  name varchar(50) Not NULL,
-  email varchar(50) NOT NULL,
-  password varchar(20) NOT NULL,
-  address varchar(50) NOT NULL,
-  mobile_no varchar(12) NOT NULL,
-  gender varchar(10) Not NULL
-);
+    customer_id int NOT NULL references customer(customer_id),
+    product_name varchar(20) NOT NULL,
+    order_id  int primary key auto_increment,
+    quantity int,
+    amount double(10,2)
+  ) ;
 
 
 
-
-
-CREATE TABLE customer_orders (
-  
-  customer_id int NOT NULL references customer(customer_id),
-  product_name varchar(20) NOT NULL,
-  order_id  int primary key auto_increment,
-  quantity int,
-  amount double(10,2)
-) ;
-
-
-
-CREATE TABLE feedback_table (
-  feedback_id int PRIMARY KEY auto_increment,
-  feedback varchar(255) DEFAULT NULL,
-  customer_id int NOT NULL references customer(customer_id),
-  rating double DEFAULT NULL
-) ;
+  CREATE TABLE feedback_table (
+    feedback_id int PRIMARY KEY auto_increment,
+    feedback varchar(255) DEFAULT NULL,
+    customer_id int NOT NULL references customer(customer_id),
+    rating double DEFAULT NULL
+  ) ;
 
 
 
 
-CREATE TABLE wishlist_product (
-  prod_id BIGINT NOT NULL references product(prod_Id),
-  wishlist_id int primary key auto_increment
-);
+  CREATE TABLE wishlist_product (
+    prod_id BIGINT NOT NULL references product(prod_Id),
+    wishlist_id int primary key auto_increment
+  );
 
 
 
 
-CREATE TABLE carddetails (
-  cardno long primary key,
-  card_holder_name varchar(50),
-  expirymonth int Not Null,
-  expiry_year int not NULL,
-  cvv int not null,
-  customer_id int references customer(customer_id)
-);
-insert into product values(1, "Chair", 500, 15, 0, "furniture", "Stackable, rust free, easy to clean Tough and durable Suitable for indoor as well as outdoor Made from high quality virgin plastic material", "https://res-5.cloudinary.com/dwpujv6in/image/upload/c_pad,dpr_2.0,f_auto,q_auto/v1/media/catalog/product/f/d/fd1_lngchr_bh_frontlow-field-lounge-chair-tait-blush.jpg", 101);
-insert into product values(2, "Oven", 11500, 5, 18, "Home Appliances", "23L Capacity: Suitable for families with 3-4 members Solo: Can be used for reheating, defrosting and cooking Warranty: 1 year on product, 1 year on magnetron", "https://image.shutterstock.com/image-photo/electric-oven-isolated-on-white-600w-183293252.jpg", 102);
-insert into product values(3, "Shirt", 1500, 30, 5, "Clothing", "Material: Cotton Sleeve: Half Sleeve
-Stylish shirt for every occassion like party,wedding,family function,engagament,office party,birthday,casual day", "http://brandstore.vistaprint.in//render/undecorated/product/PVAG-0Q4K507W3K1Y/RS-K82Q06W655QY/jpeg?compression=95&width=700", 103);
-    
-createtable product(prod_Id bigintprimarykey auto_increment, prod_Name varchar(50), prod_Price double(10,2), prod_Quantity bigint, prod_Discount double(6,2), prod_Category varchar(50), prod_Desc varchar(500), prod_Image varchar(150), merchant_Id bigintreferences merchant(merchant_Id));
+  CREATE TABLE carddetails (
+    cardno long primary key,
+    card_holder_name varchar(50),
+    expirymonth int Not Null,
+    expiry_year int not NULL,
+    cvv int not null,
+    customer_id int references customer(customer_id)
+  );
+  insert into product values(1, "Chair", 500, 15, 0, "furniture", "Stackable, rust free, easy to clean Tough and durable Suitable for indoor as well as outdoor Made from high quality virgin plastic material", "https://res-5.cloudinary.com/dwpujv6in/image/upload/c_pad,dpr_2.0,f_auto,q_auto/v1/media/catalog/product/f/d/fd1_lngchr_bh_frontlow-field-lounge-chair-tait-blush.jpg", 101);
+  insert into product values(2, "Oven", 11500, 5, 18, "Home Appliances", "23L Capacity: Suitable for families with 3-4 members Solo: Can be used for reheating, defrosting and cooking Warranty: 1 year on product, 1 year on magnetron", "https://image.shutterstock.com/image-photo/electric-oven-isolated-on-white-600w-183293252.jpg", 102);
+  insert into product values(3, "Shirt", 1500, 30, 5, "Clothing", "Material: Cotton Sleeve: Half Sleeve
+  Stylish shirt for every occassion like party,wedding,family function,engagament,office party,birthday,casual day", "http://brandstore.vistaprint.in//render/undecorated/product/PVAG-0Q4K507W3K1Y/RS-K82Q06W655QY/jpeg?compression=95&width=700", 103);
+      
+  create table product(
+    prod_Id int primary key auto_increment, 
+    prod_Name varchar(50), 
+    prod_Price double(10,2), 
+    prod_Quantity int, 
+    prod_Discount double(6,2), 
+    prod_Category varchar(50), 
+    prod_Desc varchar(500), 
+    prod_Image varchar(500), 
+    merchant_Id int
+  );
